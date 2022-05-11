@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  runApp(MaterialApp(
       title: 'Tugas Mobile',
-      home: Home(),
-    );
-  }
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => Home(),
+        '/2': (context) => SecondPage(),
+        '/3': (context) => ThirdPage(),
+      }));
 }
 
 class Home extends StatelessWidget {
@@ -47,10 +43,77 @@ class Home extends StatelessWidget {
                   fontSize: 38,
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/2');
+                },
+                child: Text("Menuju halaman page ke-2")),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/3');
+                },
+                child: Text("Menuju halaman page ke-3"))
           ]),
         ),
       ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Halaman Ke-2"),
+      ),
+      body: Center(
+        child: Column(children: [
+          SizedBox(
+            height: 500,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Kembali"))
+        ]),
+      ),
+    );
+  }
+}
+
+class ThirdPage extends StatelessWidget {
+  const ThirdPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Halaman Page ke-3"),
+      ),
+      body: Center(
+          child: Column(
+        children: [
+          SizedBox(
+            height: 500,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Kembali"))
+        ],
+      )),
     );
   }
 }
